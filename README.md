@@ -1,7 +1,7 @@
 <a id="readme-top"></a>
 <div align="center">
-<h1>Sci Kit Random Forest Regressor</h1>
-<h2>Predict London House Prices 2025</h2>
+<h1>Sci Kit London House Prices</h1>
+<h2>Predicting Rent and Sale Prices for 2025</h2>
 </div>
 <hr>
 
