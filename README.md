@@ -10,14 +10,12 @@
 ## Project Idea
 This project is a machine learning pipeline that predicts London house rental and sale prices using historical housing data. It focuses on structured tabular data from 1995 to 2024 and leverages the power of Scikit-learn, particularly Random Forest Regressors, to estimate prices based on features like property size, type, location (postcode), and time. 
 
-
-> [!WARNING]
-> **The models uploaded on Git are still small with data from 2023 to 2024. This choice has been made to test the prediction without waiting too much time to create the final models.**
-
-
 ### Example Use Case:
 A real estate agency wants to estimate the monthly rent and market value of a 75 m² flat in postcode W1A for each month of 2025. With this system, they can input the details once and get an interactive forecast graph showing how prices fluctuate throughout the year, enabling data-driven decision-making.
 </div>
+
+> [!IMPORTANT]
+> **The models uploaded on Git are still small with data from 2023 to 2024. This choice has been made to test the prediction without waiting too much time to create the final models.**
 
 <!-- TABLE OF CONTENTS -->
 ## Table of contents
