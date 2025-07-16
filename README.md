@@ -154,9 +154,9 @@ Convert date strings into datetime format and extract year, month, and day for u
 
 ### Filter recent years (Only for Test Purpose)
 ```
-# Temporary adjustment to get only 2023 to 2024 data so it will take less to do the training
 cleaned_final_df = cleaned_final_df[cleaned_final_df['year'].between(2023, 2024)]
 ```
+Temporary adjustment to get only 2023 to 2024 data so it will take less to do the training.
 
 <a id="code-3"></a>
 ### 3. Define Features and Targets
@@ -169,7 +169,7 @@ y_sale = cleaned_final_df['saleEstimate_currentPrice']
 - X: Feature matrix (independent variables).
 - y_rent: Target for rental price prediction.
 - y_sale: Target for sale price prediction.
-- 
+
 <a id="code-4"></a>
 ### 4. Time-Based Train/Test Split
 ```
@@ -177,7 +177,7 @@ train_df = cleaned_final_df[cleaned_final_df['history_date'] < '2024-07-01']
 test_df = cleaned_final_df[cleaned_final_df['history_date'] >= '2024-07-01']
 ```
 
-Predict future prices based on past data and ensures that the model is not trained on future data (avoids data leakage)
+Predict future prices based on past data and ensures that the model is not trained on future data (avoids data leakage).
 
 ### Separate training and testing data for each prediction target
 ```
@@ -206,7 +206,7 @@ preprocessor = ColumnTransformer([
 ])
 ``` 
 
-### ColumnTransformer:
+### ColumnTransformer
 Used to apply appropriate transformations:
 - **StandardScaler()** normalizes numerical data to mean 0 and variance 1.
 - **OneHotEncoder()** transforms categorical data into binary columns.
@@ -223,7 +223,7 @@ sale_pipeline = Pipeline([
     ('model', RandomForestRegressor(random_state=0))
 ])
 ``` 
-
+Reasons to use a Pipeline:
 - Ensures all preprocessing happens during both training and inference.
 - Prevents data leakage.
 - Makes model easier to deploy and save.
@@ -256,7 +256,7 @@ In this case it saves the entire trained pipeline (preprocessing + model) to dis
 
 <hr>
 
-## Pipeline Scheme:<br>
+## Pipeline Scheme<br>
  Raw input X (with categorical and numeric features)<br>
          ↓<br>
  [Pipeline]<br>
