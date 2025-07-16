@@ -11,39 +11,40 @@ start = time.time()
 #WARNING!
 #FILE "0_source_raw_data_kaggle_london_house_price_data.csv" IS NOT ON GIT ANYMORE since it was too large to store on the repo
 #ONLY "1_specific_columns_london_house_prices.csv" is uploaded and is needed for this project.
-#And this main.py is not really needed for the user anyway, but check the doc on Github for a better explanation
 #-----------------------------------------------------------------------------------------------------------------------
 
-##Used to get the important columns and create a new csv file (Not needed anymore now):
-# df = pd.read_csv("0_source_raw_data_kaggle_london_house_price_data.csv")
-# london_house_price_df = df.dropna()
-# clean_df = london_house_price_df.drop_duplicates()
-# useful_columns_df = clean_df[['fullAddress','postcode','floorAreaSqM','propertyType','rentEstimate_currentPrice','saleEstimate_currentPrice', 'history_date']].copy()
-# useful_columns_df.to_csv('1_specific_columns_london_house_prices.csv', index=False)
-# print(useful_columns_df.columns.to_list())
+## Used to extract the important columns and save them to a smaller CSV file:
+## NOT NEEDED ANYMORE NOW since the file 1_specific_columns_london_house_prices.csv is already in the data folder of this project and there is no need to create it again
+# df_original = pd.read_csv("0_source_raw_data_kaggle_london_house_price_data.csv")
+# df_original.dropna(inplace=True)
+# df_original.drop_duplicates(inplace=True)
+# useful_columns = ['fullAddress', 'postcode', 'floorAreaSqM', 'propertyType',
+#                   'rentEstimate_currentPrice', 'saleEstimate_currentPrice', 'history_date']
+# df_original[useful_columns].to_csv('1_specific_columns_london_house_prices.csv', index=False)
+# print(useful_columns)
 
-#This data is from 1995-01-02 to 2024-09-27
-df = pd.read_csv("data/1_specific_columns_london_house_prices.csv")
-df = df.dropna()
-df = df.drop_duplicates()
-clean_df = df.copy()
-clean_df['history_date'] = pd.to_datetime(clean_df['history_date'])
-clean_df['year'] = clean_df['history_date'].dt.year
-clean_df['month'] = clean_df['history_date'].dt.month
-clean_df['day'] = clean_df['history_date'].dt.day
-#Temporary adjustment to get only 2023 to 2024 data so it will take less to do the training
-clean_df = clean_df[clean_df['year'].between(2023, 2024)]
-# clean_df.to_csv('2_final_cleaned_model_data_london_house_prices.csv', index=False)
+# This data is from 1995-01-02 to 2024-09-27
+cleaned_final_df = pd.read_csv("data/1_specific_columns_london_house_prices.csv")
+cleaned_final_df.dropna(inplace=True)
+cleaned_final_df.drop_duplicates(inplace=True)
+cleaned_final_df['history_date'] = pd.to_datetime(cleaned_final_df['history_date'])
+cleaned_final_df['year'] = cleaned_final_df['history_date'].dt.year
+cleaned_final_df['month'] = cleaned_final_df['history_date'].dt.month
+cleaned_final_df['day'] = cleaned_final_df['history_date'].dt.day
+
+# Temporary adjustment to get only 2023 to 2024 data so it will take less to do the training
+cleaned_final_df = cleaned_final_df[cleaned_final_df['year'].between(2023, 2024)]
+# cleaned_final_df.to_csv('2_final_cleaned_model_data_london_house_prices.csv', index=False)
 
 print("Defining features and targets of the model...")
 features = ['postcode', 'floorAreaSqM', 'propertyType', 'year', 'month']
-X = clean_df[features]
-y_rent = clean_df['rentEstimate_currentPrice']
-y_sale = clean_df['saleEstimate_currentPrice']
+X = cleaned_final_df[features]
+y_rent = cleaned_final_df['rentEstimate_currentPrice']
+y_sale = cleaned_final_df['saleEstimate_currentPrice']
 
 print("Training the model only on past data...")
-train_df = clean_df[clean_df['history_date'] < '2024-07-01']
-test_df = clean_df[clean_df['history_date'] >= '2024-07-01']
+train_df = cleaned_final_df[cleaned_final_df['history_date'] < '2024-07-01']
+test_df = cleaned_final_df[cleaned_final_df['history_date'] >= '2024-07-01']
 
 X_train = train_df[features]
 X_test = test_df[features]
