@@ -44,14 +44,17 @@ y_sale = cleaned_final_df['saleEstimate_currentPrice']
 
 print("Training the model only on past data...")
 train_df = cleaned_final_df[cleaned_final_df['history_date'] < '2024-07-01']
-test_df = cleaned_final_df[cleaned_final_df['history_date'] >= '2024-07-01']
+
+# I still didn't do the Evaluation of the model after the training, so these variables will not be used for now but stored here for later use.
+# test_df = cleaned_final_df[cleaned_final_df['history_date'] >= '2022-07-01']
+# y_sale_test = test_df['saleEstimate_currentPrice']
+# y_rent_test = test_df['rentEstimate_currentPrice']
+# X_test = test_df[features]
 
 X_train = train_df[features]
-X_test = test_df[features]
 y_rent_train = train_df['rentEstimate_currentPrice']
-y_rent_test = test_df['rentEstimate_currentPrice']
 y_sale_train = train_df['saleEstimate_currentPrice']
-y_sale_test = test_df['saleEstimate_currentPrice']
+
 
 categorical_cols = ['postcode', 'propertyType']
 numerical_cols = ['floorAreaSqM', 'year', 'month']
