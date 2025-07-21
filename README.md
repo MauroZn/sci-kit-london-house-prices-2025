@@ -171,7 +171,7 @@ y_sale = cleaned_final_df['saleEstimate_currentPrice']
 - y_sale: Target for sale price prediction.
 
 <a id="code-4"></a>
-### 4. Time-Based Train/Test Split
+### 4. Set Training Data
 ```
 train_df = cleaned_final_df[cleaned_final_df['history_date'] < '2024-07-01']
 ```
