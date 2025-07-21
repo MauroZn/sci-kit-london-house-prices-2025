@@ -174,7 +174,6 @@ y_sale = cleaned_final_df['saleEstimate_currentPrice']
 ### 4. Time-Based Train/Test Split
 ```
 train_df = cleaned_final_df[cleaned_final_df['history_date'] < '2024-07-01']
-test_df = cleaned_final_df[cleaned_final_df['history_date'] >= '2024-07-01']
 ```
 
 Predict future prices based on past data and ensures that the model is not trained on future data (avoids data leakage).
@@ -182,11 +181,8 @@ Predict future prices based on past data and ensures that the model is not train
 ### Separate training and testing data for each prediction target
 ```
 X_train = train_df[features]
-X_test = test_df[features]
 y_rent_train = train_df['rentEstimate_currentPrice']
-y_rent_test = test_df['rentEstimate_currentPrice']
 y_sale_train = train_df['saleEstimate_currentPrice']
-y_sale_test = test_df['saleEstimate_currentPrice']
 ```
 
 <a id="code-5"></a>
